@@ -9,8 +9,11 @@ namespace AdventureQuestRPG
             damage = damage > 0 ? damage : 0;
             target.Health -= damage;
             target.Health = target.Health < 0 ? 0 : target.Health;
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"{attacker.Name} attacks {target.Name} for {damage} damage. {target.Name} now has {target.Health} health.");
+            Console.ResetColor();
         }
+
         public void startBattle(Player player, Monster enemy)
         {
             try
@@ -23,7 +26,9 @@ namespace AdventureQuestRPG
                     Attack(player, enemy);
                     if (enemy.Health <= 0)
                     {
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("You have defeated the monster!");
+                        Console.ResetColor();
                         player.GainExperience(50);
                         Console.WriteLine($"{player.Name},You are in level : {player.Level}");
                         handleDroppedItems(player);
@@ -33,7 +38,9 @@ namespace AdventureQuestRPG
                     enemy.Attack(player);
                     if (player.Health <= 0)
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("You have been defeated by the monster!");
+                        Console.ResetColor();
                         break;
                     }
                 }
@@ -42,18 +49,25 @@ namespace AdventureQuestRPG
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
+
         }
+
         public void handleDroppedItems(Player player)
         {
             Random rand = new Random();
-            int res = rand.Next(0, 2);
-            if (res != null)
+            int chance = rand.Next(0, 100);
+            if (chance < 30)
             {
                 Console.WriteLine(" ** You have 1 item added to your inventory");
                 var item = randomPickItem();
                 player.inventory.addItem(item);
             }
+            else
+            {
+                Console.WriteLine(" ** No item dropped this time.");
+            }
         }
+
         public Item randomPickItem()
         {
             Random rand = new Random();

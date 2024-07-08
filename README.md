@@ -18,7 +18,7 @@ This lab was made in collaboration with my colleague [Moayad Hamdan](https://git
 - Represents the player-controlled character with attributes such as `Name`, `Health`, `AttackPower`, `Defense`, `Level`, and `Experience`.
 - Methods include `GainExperience(int amount)`, `LevelUp()`, and `DisplayInfo()`.
 
-- 
+  
 #### Monster Classes
 - **Monster (Abstract Base Class)**:
   - Base class for all monsters with properties `Name`, `Health`, `AttackPower`, and `Defense`.
